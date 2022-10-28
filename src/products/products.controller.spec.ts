@@ -3,6 +3,7 @@ import { ProductsController } from './products.controller'
 import { ProductsService } from './products.service'
 
 import { CreateProductDto } from './dto/create-product.dto'
+import { Product } from './entities/product.entity'
 
 describe('ProductsController', () => {
   let controller: ProductsController
@@ -12,7 +13,7 @@ describe('ProductsController', () => {
       id: Date.now(),
       ...dto
     })),
-    findAll: () => [{}],
+    findAll: () => [new Product()],
     findOne: () => ({}),
     update: () => ({}),
     remove: () => null
@@ -45,5 +46,11 @@ describe('ProductsController', () => {
       id: expect.any(Number),
       ...dto
     })
+
+    expect(mockProcutsService.create).toHaveBeenCalledWith(dto)
+  })
+
+  it('shold find all products', () => {
+    expect(controller.findAll()).toEqual([new Product()])
   })
 })
