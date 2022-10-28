@@ -1,10 +1,16 @@
-export class Product {
-  id: string
-  name: string
-  price: number
-  quantity: number
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
-  constructor(init?: Partial<Product>) {
-    Object.assign(this, init)
-  }
+@Entity()
+export class Product {
+  @PrimaryGeneratedColumn()
+  id: number
+
+  @Column()
+  name: string
+
+  @Column()
+  price: number
+
+  @Column()
+  quantity: number
 }
